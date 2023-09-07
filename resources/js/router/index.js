@@ -5,10 +5,11 @@ import Main from '../components/layouts/Main'
 import Dashboard from '../views/dashboard/Index.vue'
 import StudentList from "../views/students/Index"
 import UserList from '../views/users/Index'
-import SliderList from '../views/slider/Index'
 import MenuList from '../views/menu/List'
 import MenuPermission from '../views/users/MenuPermission'
-
+import SliderList from '../views/slider/Index'
+import EventList from '../views/event/Index'
+import ProgramList from '../views/program/Index'
 
 import NotFound from '../views/404/Index';
 import {baseurl} from '../base_url'
@@ -59,7 +60,12 @@ const routes = [
             //menu vue route
             {path: baseurl + 'menu-list', name: 'MenuList', component: MenuList},
             {path: baseurl + 'user-menu-permission', name: 'UserMenuPermission', component: MenuPermission},
+            //slider
             {path: baseurl + 'slider-list', name: 'SliderList', component: SliderList},
+            //event
+            {path: baseurl + 'event-list', name: 'EventList', component: EventList},
+            //event
+            {path: baseurl + 'program-list', name: 'ProgramList', component: ProgramList},
         ],
         beforeEnter(to, from, next) {
             checkToken(to, from, next);

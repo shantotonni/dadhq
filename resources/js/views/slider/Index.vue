@@ -32,27 +32,41 @@
                       <tr>
                         <th>SN</th>
                         <th>Slider Name</th>
+                        <th>Paragraph</th>
+                        <th>Link</th>
+                        <th>Order</th>
+                        <th>Status</th>
+                        <th>Image</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-<!--                      <tr v-for="(category, i) in categories" :key="category.student_bill_id" v-if="categories.length">-->
-<!--                        <th scope="row">{{ ++i }}</th>-->
-<!--                        <td>{{ category.name }}</td>-->
-<!--                        <td>-->
-<!--                          <button @click="edit(category)" class="btn btn-success btn-sm"><i class="far fa-edit"></i></button>-->
-<!--                          <button @click="destroy(category.id)" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>-->
-<!--                        </td>-->
-<!--                      </tr>-->
+                    <tr v-for="(slider, i) in sliders"
+                        :key="slider.id"
+                        v-if="sliders.length">
+                      <th class="text-center" scope="row">{{ ++i }}</th>
+                      <td class="text-left">{{ slider.title }}</td>
+                      <td class="text-left" v-html="slider.paragraph "></td>
+                      <td class="text-left">{{ slider.link }}</td>
+                      <td class="text-right">{{ slider.ordering }}</td>
+                      <td class="text-left">{{ slider.status }}</td>
+                      <td class="text-left">
+                        <img v-if="slider.image" height="40" width="40"
+                             :src="tableImage(slider.image)" alt="">
+                      </td>
+                      <td class="text-center">
+                        <button @click="edit(slider)" class="btn btn-success btn-sm">
+                          <i
+                              class="far fa-edit"></i></button>
+                        <button @click="destroy(slider.id)"
+                                class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
                     </tbody>
                   </table>
                   <br>
-                  <pagination
-                      v-if="pagination.last_page > 1"
-                      :pagination="pagination"
-                      :offset="5"
-                      @paginate="query === '' ? getAllSlider() : searchData()"
-                  ></pagination>
+
                 </div>
               </div>
             </div>
@@ -78,8 +92,63 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Slider Name</label>
-                      <input type="text" name="name" v-model="form.name" class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
-                      <div class="error" v-if="form.errors.has('name')" v-html="form.errors.get('name')" />
+                      <input type="text" name="title" v-model="form.title" class="form-control" :class="{ 'is-invalid': form.errors.has('title') }">
+                      <div class="error" v-if="form.errors.has('title')" v-html="form.errors.get('title')" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Ordering</label>
+                      <input type="number" name="ordering" v-model="form.ordering" class="form-control" :class="{ 'is-invalid': form.errors.has('ordering') }">
+                      <div class="error" v-if="form.errors.has('ordering')" v-html="form.errors.get('ordering')" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Status</label>
+                      <select type="Status" name="status" v-model="form.status"
+                              class="form-control"
+                              :class="{ 'is-invalid': form.errors.has('status') }">
+                        <option disabled value="">Select Status</option>
+                        <option >
+                          Active
+                        </option>
+                        <option >
+                          Inactive
+                        </option>
+                      </select>
+                      <div class="error" v-if="form.errors.has('status')"
+                           v-html="form.errors.get('status')"/>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Link</label>
+                      <input type="text" name="link" v-model="form.link" class="form-control" :class="{ 'is-invalid': form.errors.has('link') }">
+                      <div class="error" v-if="form.errors.has('link')" v-html="form.errors.get('link')" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Image <small>(Image type:jpeg,jpg,png,svg)</small></label>
+                      <input @change="changeImage($event)" type="file" name="image"
+                             class="form-control"
+                             :class="{ 'is-invalid': form.errors.has('image') }">
+                      <div class="error" v-if="form.errors.has('image')"
+                           v-html="form.errors.get('image')"/>
+                      <img v-if="form.image" :src="showImage(form.image)" alt="" height="40px"
+                           width="40px">
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="form-group">
+                        <label>Paragraph</label>
+                        <vue-editor name="paragraph" v-model="form.paragraph" :class="{ 'is-invalid': form.errors.has('paragraph') }"></vue-editor>
+                        <div class="error" v-if="form.errors.has('paragraph')" v-html="form.errors.get('paragraph')"/>
+                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -98,8 +167,12 @@
 
 <script>
 import {baseurl} from '../../base_url'
+import {VueEditor} from "vue2-editor";
+
 export default {
-  name: "List",
+  components: {
+    VueEditor
+  },
   data() {
     return {
       sliders: [],
@@ -111,7 +184,12 @@ export default {
       isLoading: false,
       form: new Form({
         id :'',
-        name :'',
+        title :'',
+        paragraph :'',
+        link :'',
+        image :'',
+        status :'',
+        ordering :'',
       }),
     }
   },
@@ -170,11 +248,11 @@ export default {
         this.isLoading = false;
       });
     },
-    edit(category) {
+    edit(slider) {
       this.editMode = true;
       this.form.reset();
       this.form.clear();
-      this.form.fill(category);
+      this.form.fill(slider);
       $("#SliderModal").modal("show");
     },
     update(){
@@ -186,28 +264,47 @@ export default {
         this.isLoading = false;
       });
     },
-    destroy(id){
+    changeImage(event) {
+      let file = event.target.files[0];
+      let reader = new FileReader();
+      reader.onload = event => {
+        this.form.image = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
+    showImage() {
+      let img = this.form.image;
+      if (img.length > 100) {
+        return this.form.image;
+      } else {
+        return window.location.origin + "/images/slider/" + this.form.image;
+      }
+    },
+    tableImage(image) {
+      return window.location.origin + "/images/slider/" + image;
+    },
+    destroy(id) {
       Swal.fire({
-        title: 'You Can not Delete this Category.Because This Category Related To another module',
-        // text: "You won't be able to revert this!",
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        // confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
-        // if (result.isConfirmed) {
-        //   axios.delete(baseurl + 'api/sliders/'+ id).then((response)=>{
-        //     this.getAllCategory();
-        //     Swal.fire(
-        //         'Deleted!',
-        //         'Your file has been deleted.',
-        //         'success'
-        //     )
-        //   })
-        // }
+        if (result.isConfirmed) {
+          axios.delete('api/sliders/' + id).then((response) => {
+            this.getAllSlider();
+            Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
+          })
+        }
       })
-    },
+    }
   },
 }
 </script>
