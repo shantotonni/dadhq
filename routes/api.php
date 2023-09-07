@@ -38,6 +38,8 @@ Route::group(['middleware' => ['jwt:api']], function () {
     Route::get('search/users/{query}', [UserController::class,'search']);
     Route::get('get-all-users/', [UserController::class, 'getAllUser']);
 
+
+
     Route::group(['prefix' => 'support'],function () {
         Route::get('session-years-data',[SupportController::class,'index']);
         Route::get('session-head-data',[SupportController::class,'sessionHeadData']);

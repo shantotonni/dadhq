@@ -10,7 +10,7 @@ class SliderController extends Controller
 {
     public function index()
     {
-        $sliders = Slider::orderBy('id','desc')->with('currency')->paginate(15);
+        $sliders = Slider::orderBy('id','desc')->with('currency')->all(15);
         return new SliderCollection($sliders);
     }
 
