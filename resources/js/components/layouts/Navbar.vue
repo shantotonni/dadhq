@@ -3,7 +3,7 @@
     <!-- LOGO -->
     <div class="topbar-left">
       <router-link :to="{name : 'Dashboard'}" class="logo" style="color: white!important;">
-        Medical Billing
+        DadHQ
       </router-link>
     </div>
     <nav class="navbar-custom">
