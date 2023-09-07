@@ -23,20 +23,9 @@ use Illuminate\Http\Request;
 
 class CommonController extends Controller
 {
-    public function userModalData() {
-        return response()->json([
-            'status' => 'success',
-            'roles' => RoleService::list(),
-            'business' => BusinessService::list(),
-            'department' => DepartmentService::list(),
-            'allSubMenus' => Menu::whereNotIn('MenuID',['Dashboard','Users'])->with('allSubMenus')->get()
-        ]);
-    }
-
     public function getAllSession(){
         return response()->json([
             'status' => 'success',
-            'sessions' => Sessions::all(),
         ]);
     }
 
