@@ -203,7 +203,7 @@ export default {
     }
   },
   mounted() {
-    document.title = 'Slider List | Bill';
+    document.title = 'Slider List | DadHQ';
     this.getAllSlider();
   },
   methods: {

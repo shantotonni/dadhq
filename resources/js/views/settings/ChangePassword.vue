@@ -6,7 +6,7 @@
                     <div class="col-sm-6">
                         <h4 class="page-title">Users</h4>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item active">Welcome to Veltrix Dashboard</li>
+                            <li class="breadcrumb-item active">Welcome to DadHQ Dashboard</li>
                         </ol>
                     </div>
                 </div>

@@ -212,7 +212,7 @@ export default {
     }
   },
   mounted() {
-    document.title = 'Event List | Bill';
+    document.title = 'Event List | DadHQ';
     this.getAllEvent();
   },
   methods: {
