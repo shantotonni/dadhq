@@ -140,7 +140,7 @@
 </template>
 
 <script>
-document.title = 'Menu Item List | Medical Bill';
+document.title = 'Menu Item List | DadHQ';
 import {baseurl} from '../../base_url'
 export default {
     name: "List",

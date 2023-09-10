@@ -10,6 +10,7 @@ import MenuPermission from '../views/users/MenuPermission'
 import SliderList from '../views/slider/Index'
 import EventList from '../views/event/Index'
 import ProgramList from '../views/program/Index'
+import CustomerList from '../views/customer/Index'
 
 import NotFound from '../views/404/Index';
 import {baseurl} from '../base_url'
@@ -66,6 +67,8 @@ const routes = [
             {path: baseurl + 'event-list', name: 'EventList', component: EventList},
             //event
             {path: baseurl + 'program-list', name: 'ProgramList', component: ProgramList},
+            //event
+            {path: baseurl + 'customer-list', name: 'CustomerList', component: CustomerList},
         ],
         beforeEnter(to, from, next) {
             checkToken(to, from, next);

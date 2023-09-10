@@ -3,6 +3,7 @@
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HeadController;
 use App\Http\Controllers\HostelFeeController;
@@ -58,13 +59,16 @@ Route::group(['middleware' => ['jwt:api']], function () {
 //Slider
     Route::apiResource('sliders',SliderController::class);
     Route::get('search/sliders/{query}', [SliderController::class,'search']);
-    //Slider
+    //event
     Route::apiResource('events',EventController::class);
     Route::get('search/events/{query}', [EventController::class,'search']);
 
-    //Slider
+    //program
     Route::apiResource('programs',ProgramController::class);
     Route::get('search/programs/{query}', [ProgramController::class,'search']);
+    //customer
+    Route::apiResource('customers',CustomerController::class);
+    Route::get('search/customers/{query}', [CustomerController::class,'search']);
 
     //menu resource route
     Route::apiResource('menu', MenuController::class);

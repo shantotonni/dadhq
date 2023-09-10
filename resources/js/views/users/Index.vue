@@ -187,7 +187,7 @@ export default {
     }
   },
   mounted() {
-    document.title = 'User List | Bill';
+    document.title = 'User List | DadHQ';
     this.getAllUser();
   },
   methods: {

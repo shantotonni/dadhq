@@ -192,7 +192,7 @@ export default {
     }
   },
   mounted() {
-    document.title = 'Program List | Bill';
+    document.title = 'Program List | DadHQ';
     this.getAllProgram();
   },
   methods: {

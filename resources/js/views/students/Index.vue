@@ -337,7 +337,7 @@ export default {
     }
   },
   mounted() {
-    document.title = 'Student List | Bill';
+    document.title = 'Student List | DadHQ';
     this.getAllStudent();
     this.getAllSession();
   },

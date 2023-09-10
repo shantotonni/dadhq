@@ -39,7 +39,7 @@
 </template>
 
 <script>
-document.title = 'User Menu Permission | Medical Bill';
+document.title = 'User Menu Permission | DadHQ';
 import {baseurl} from '../../base_url'
 export default {
     name: "Create",

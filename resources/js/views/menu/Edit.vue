@@ -66,7 +66,7 @@
 </template>
 
 <script>
-document.title = 'Menu Edit | Diesel Engine';
+document.title = 'Menu Edit | DadHQ';
 export default {
     name: "Edit",
     data() {
