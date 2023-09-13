@@ -27,7 +27,8 @@ use \App\Http\Controllers\CommonController;
 use \App\Http\Controllers\SupportController;
 use \App\Http\Controllers\SessionFeeController;
 
-Route::post('login', [AuthController::class, 'login']);
+Route::post('auth/login', [AuthController::class, 'login']);
+Route::post('registration', [AuthController::class, 'registration']);
 
 Route::group(['middleware' => 'jwt:api'], function () {
     Route::post('logout', [AuthController::class, 'logout']);
