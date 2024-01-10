@@ -18,10 +18,10 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class AuthController extends Controller
 {
     function __construct() {
-        Config::set('jwt.user', Customer::class);
+        Config::set('jwt.user', User::class);
         Config::set('auth.providers', ['users' => [
             'driver' => 'eloquent',
-            'model' => Customer::class,
+            'model' => User::class,
         ]]);
     }
 
@@ -102,39 +102,6 @@ class AuthController extends Controller
                 'message'=>'UserId or Password Not Match',
                 'status'=>401
             ],200);
-        }
-    }
-
-    public function registration(Request $request)
-    {
-        $this->validate($request,[
-            'first_name' => 'required|string',
-            'email' => 'required',
-            'password' => 'required|string|min:6'
-        ]);
-
-        try {
-            $want_to_receive_email = $request->want_to_receive_email;
-            if ($want_to_receive_email == true){
-                $status = 'Y';
-            }else{
-                $status = 'N';
-            }
-            $customer = new Customer();
-            $customer->first_name = $request->first_name;
-            $customer->last_name = $request->last_name;
-            $customer->email = $request->email;
-            $customer->phone = $request->phone;
-            $customer->ages_of_children = $request->ages_of_children;
-            $customer->ages_of_father = $request->ages_of_father;
-            $customer->want_to_receive_email = $status;
-            $customer->customer_status = 'Y';
-            $customer->password = bcrypt($request->password);
-            $customer->save();
-            return response()->json(['message' => "success"]);
-
-        } catch (\Exception $exception) {
-            return $exception->getMessage();
         }
     }
 

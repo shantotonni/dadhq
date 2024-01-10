@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HeadController;
 use App\Http\Controllers\HostelFeeController;
 use App\Http\Controllers\MenuController;
@@ -27,8 +30,13 @@ use \App\Http\Controllers\CommonController;
 use \App\Http\Controllers\SupportController;
 use \App\Http\Controllers\SessionFeeController;
 
-Route::post('auth/login', [AuthController::class, 'login']);
-Route::post('registration', [AuthController::class, 'registration']);
+Route::post('login', [AuthController::class, 'login']);
+
+//for customer login
+Route::post('auth/login', [CustomerAuthController::class, 'login']);
+Route::post('auth/registration', [CustomerAuthController::class, 'registration']);
+Route::get('auth/user', [CustomerAuthController::class, 'me']);
+Route::post('auth/logout', [CustomerAuthController::class, 'logout']);
 
 Route::group(['middleware' => 'jwt:api'], function () {
     Route::post('logout', [AuthController::class, 'logout']);
@@ -56,7 +64,6 @@ Route::group(['middleware' => ['jwt:api']], function () {
     Route::get('get-student-wise-schedule-data/{student_id}', [StudentController::class,'getStudentWiseScheduleData']);
     Route::post('student-details', [StudentController::class,'getStudentDetails']);
 
-
 //Slider
     Route::apiResource('sliders',SliderController::class);
     Route::get('search/sliders/{query}', [SliderController::class,'search']);
@@ -82,5 +89,13 @@ Route::group(['middleware' => ['jwt:api']], function () {
     Route::post('save-user-menu-permission', [MenuPermissionController::class,'saveUserMenuPermission']);
 
     Route::get('get-all-session', [CommonController::class,'getAllSession']);
+});
 
+Route::get('get-all-program', [FrontController::class,'getAllProgram']);
+Route::get('get-all-events', [FrontController::class,'getAllEvents']);
+Route::get('get-program-details', [FrontController::class, 'getOurProgramDetails']);
+
+Route::group(['middleware' => 'CustomerAuth'], function () {
+    Route::post('auth/profile-update', [CustomerAuthController::class, 'updateProfile']);
+    Route::get('join-program', [ActivityController::class, 'joinProgram']);
 });

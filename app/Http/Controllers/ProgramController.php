@@ -13,10 +13,8 @@ class ProgramController extends Controller
     public function index()
     {
         $programs = Program::orderBy('id','desc')->paginate(15);
-
         return new ProgramCollection($programs);
     }
-
 
     public function store(ProgramStoreRequest $request)
     {
@@ -30,6 +28,7 @@ class ProgramController extends Controller
 
         $program = new Program();
         $program->title = $request->title;
+        $program->short = $request->short;
         $program->description = $request->description;
         $program->ordering = $request->ordering;
         $program->image = $name;
@@ -55,7 +54,7 @@ class ProgramController extends Controller
                     }
                 }
                 $name = uniqid() . time() . '.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-                Image::make($image)->resize(1600,1000)->save(public_path('images/program/') . $name);
+                Image::make($image)->save(public_path('images/program/') . $name);
             } else {
                 $name = $program->image;
             }
@@ -64,6 +63,7 @@ class ProgramController extends Controller
         }
 
         $program->title = $request->title;
+        $program->short = $request->short;
         $program->description = $request->description;
         $program->ordering = $request->ordering;
         $program->image = $name;

@@ -51,8 +51,7 @@
                       <td class="text-right">{{ event.ordering }}</td>
                       <td class="text-left">{{ event.status }}</td>
                       <td class="text-left">
-                        <img v-if="event.image" height="40" width="40"
-                             :src="tableImage(event.image)" alt="">
+                        <img v-if="event.image" height="40" width="40" :src="tableImage(event.image)" alt="">
                       </td>
                       <td class="text-center">
                         <button @click="edit(event)" class="btn btn-success btn-sm">

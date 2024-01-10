@@ -57,7 +57,8 @@ export default {
         email: this.email,
         password: this.password
       }, (response) => {
-        localStorage.setItem("token", response.access_token);
+        console.log(response)
+        localStorage.setItem("token", response.token);
         this.successNoti('Successfully logged in.');
         this.$store.commit('submitButtonLoadingStatus', false);
         this.redirect(this.mainOrigin + 'dashboard')

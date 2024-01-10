@@ -6,12 +6,6 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ProgramCollection extends ResourceCollection
 {
-    /**
-     * Transform the resource collection into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
-     */
     public function toArray($request)
     {
         return [
@@ -19,6 +13,7 @@ class ProgramCollection extends ResourceCollection
                 return [
                     'id'=>$program->id,
                     'title'=>$program->title,
+                    'short'=>$program->short,
                     'description'=>$program->description,
                     'ordering'=>$program->ordering,
                     'status'=>$program->status,

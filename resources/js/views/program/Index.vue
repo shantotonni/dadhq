@@ -96,6 +96,13 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
+                      <label>Short Title</label>
+                      <input type="text" name="short" v-model="form.short" class="form-control" :class="{ 'is-invalid': form.errors.has('short') }">
+                      <div class="error" v-if="form.errors.has('short')" v-html="form.errors.get('short')" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
                       <label>Ordering</label>
                       <input type="number" name="ordering" v-model="form.ordering" class="form-control" :class="{ 'is-invalid': form.errors.has('ordering') }">
                       <div class="error" v-if="form.errors.has('ordering')" v-html="form.errors.get('ordering')" />
@@ -104,32 +111,21 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Status</label>
-                      <select type="Status" name="status" v-model="form.status"
-                              class="form-control"
-                              :class="{ 'is-invalid': form.errors.has('status') }">
+                      <select type="Status" name="status" v-model="form.status" class="form-control" :class="{ 'is-invalid': form.errors.has('status') }">
                         <option disabled value="">Select Status</option>
-                        <option >
-                          Active
-                        </option>
-                        <option >
-                          Inactive
-                        </option>
+                        <option >Active</option>
+                        <option >Inactive</option>
                       </select>
-                      <div class="error" v-if="form.errors.has('status')"
-                           v-html="form.errors.get('status')"/>
+                      <div class="error" v-if="form.errors.has('status')" v-html="form.errors.get('status')"/>
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Image <small>(Image type:jpeg,jpg,png,svg)</small></label>
-                      <input @change="changeImage($event)" type="file" name="image"
-                             class="form-control"
-                             :class="{ 'is-invalid': form.errors.has('image') }">
-                      <div class="error" v-if="form.errors.has('image')"
-                           v-html="form.errors.get('image')"/>
-                      <img v-if="form.image" :src="showImage(form.image)" alt="" height="40px"
-                           width="40px">
+                      <input @change="changeImage($event)" type="file" name="image" class="form-control" :class="{ 'is-invalid': form.errors.has('image') }">
+                      <div class="error" v-if="form.errors.has('image')" v-html="form.errors.get('image')"/>
+                      <img v-if="form.image" :src="showImage(form.image)" alt="" height="40px" width="40px">
                     </div>
                   </div>
                   <div class="col-md-12">
@@ -175,6 +171,7 @@ export default {
       form: new Form({
         id :'',
         title :'',
+        short :'',
         description :'',
         image :'',
         status :'',
