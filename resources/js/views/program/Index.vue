@@ -33,32 +33,27 @@
                         <th>SN</th>
                         <th>Program Name</th>
                         <th>Description</th>
-                        <th>Order</th>
+                        <th>Date</th>
+                        <th>Time</th>
                         <th>Status</th>
                         <th>Image</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(program, i) in programs"
-                        :key="program.id"
-                        v-if="programs.length">
+                    <tr v-for="(program, i) in programs" :key="program.id" v-if="programs.length">
                       <th class="text-center" scope="row">{{ ++i }}</th>
                       <td class="text-left">{{ program.title }}</td>
-                      <td class="text-left" v-html="program.description "></td>
-                      <td class="text-right">{{ program.ordering }}</td>
+                      <td class="text-left" v-html="program.description" width="50%"></td>
+                      <td class="text-right">{{ program.program_date }}</td>
+                      <td class="text-right">{{ program.program_time }}</td>
                       <td class="text-left">{{ program.status }}</td>
                       <td class="text-left">
-                        <img v-if="program.image" height="40" width="40"
-                             :src="tableImage(program.image)" alt="">
+                        <img v-if="program.image" height="40" width="40" :src="tableImage(program.image)" alt="">
                       </td>
                       <td class="text-center">
-                        <button @click="edit(program)" class="btn btn-success btn-sm">
-                          <i
-                              class="far fa-edit"></i></button>
-                        <button @click="destroy(program.id)"
-                                class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>
-                        </button>
+                        <button @click="edit(program)" class="btn btn-success btn-sm"><i class="far fa-edit"></i></button>
+                        <button @click="destroy(program.id)" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                       </td>
                     </tr>
                     </tbody>
@@ -99,6 +94,20 @@
                       <label>Short Title</label>
                       <input type="text" name="short" v-model="form.short" class="form-control" :class="{ 'is-invalid': form.errors.has('short') }">
                       <div class="error" v-if="form.errors.has('short')" v-html="form.errors.get('short')" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Program Date</label>
+                      <datepicker :format="customFormatter" v-model="form.program_date" input-class="form-control" :class="{ 'is-invalid': form.errors.has('program_date') }"></datepicker>
+                      <div class="error" v-if="form.errors.has('program_date')" v-html="form.errors.get('program_date')"/>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Program Time</label>
+                      <input class="form-control" type="time" v-model="form.program_time" :class="{ 'is-invalid': form.errors.has('program_time') }">
+                      <div class="error" v-if="form.errors.has('program_time')" v-html="form.errors.get('program_time')"/>
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -154,10 +163,13 @@
 <script>
 import {baseurl} from '../../base_url'
 import {VueEditor} from "vue2-editor";
+import Datepicker from 'vuejs-datepicker';
+import moment from "moment";
 
 export default {
   components: {
-    VueEditor
+    VueEditor,
+    Datepicker
   },
   data() {
     return {
@@ -176,6 +188,8 @@ export default {
         image :'',
         status :'',
         ordering :'',
+        program_date :'',
+        program_time :'',
       }),
     }
   },
@@ -290,7 +304,10 @@ export default {
           })
         }
       })
-    }
+    },
+    customFormatter(date) {
+      return moment(date).format('YYYY-MM-DD ');
+    },
   },
 }
 </script>

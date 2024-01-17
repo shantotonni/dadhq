@@ -4,19 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\Event\EventCollection;
 use App\Http\Resources\Program\ProgramCollection;
+use App\Http\Resources\Slider\SliderCollection;
 use App\Models\Event;
 use App\Models\Program;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
+    public function getAllSlider(){
+        $sliders = Slider::query()->where('status','active')->orderBy('ordering','asc')->get();
+        return new SliderCollection($sliders);
+    }
+
     public function getAllProgram(){
         $programs = Program::query()->orderBy('ordering','asc')->get();
         return new ProgramCollection($programs);
     }
 
     public function getAllEvents(){
-        $events = Event::query()->orderBy('ordering','asc')->get();
+        $events = Event::query()->where('status','Active')->orderBy('ordering','asc')->get();
         return new EventCollection($events);
     }
 

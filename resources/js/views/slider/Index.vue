@@ -51,22 +51,15 @@
                       <td class="text-right">{{ slider.ordering }}</td>
                       <td class="text-left">{{ slider.status }}</td>
                       <td class="text-left">
-                        <img v-if="slider.image" height="40" width="40"
-                             :src="tableImage(slider.image)" alt="">
+                        <img v-if="slider.image" height="40" width="40" :src="tableImage(slider.image)" alt="">
                       </td>
                       <td class="text-center">
-                        <button @click="edit(slider)" class="btn btn-success btn-sm">
-                          <i
-                              class="far fa-edit"></i></button>
-                        <button @click="destroy(slider.id)"
-                                class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>
-                        </button>
+                        <button @click="edit(slider)" class="btn btn-success btn-sm"><i class="far fa-edit"></i></button>
+                        <button @click="destroy(slider.id)" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                       </td>
                     </tr>
                     </tbody>
                   </table>
-                  <br>
-
                 </div>
               </div>
             </div>
@@ -106,22 +99,14 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Status</label>
-                      <select type="Status" name="status" v-model="form.status"
-                              class="form-control"
-                              :class="{ 'is-invalid': form.errors.has('status') }">
+                      <select type="Status" name="status" v-model="form.status" class="form-control" :class="{ 'is-invalid': form.errors.has('status') }">
                         <option disabled value="">Select Status</option>
-                        <option >
-                          Active
-                        </option>
-                        <option >
-                          Inactive
-                        </option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
                       </select>
-                      <div class="error" v-if="form.errors.has('status')"
-                           v-html="form.errors.get('status')"/>
+                      <div class="error" v-if="form.errors.has('status')" v-html="form.errors.get('status')"/>
                     </div>
                   </div>
-
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Link</label>
@@ -132,13 +117,9 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Image <small>(Image type:jpeg,jpg,png,svg)</small></label>
-                      <input @change="changeImage($event)" type="file" name="image"
-                             class="form-control"
-                             :class="{ 'is-invalid': form.errors.has('image') }">
-                      <div class="error" v-if="form.errors.has('image')"
-                           v-html="form.errors.get('image')"/>
-                      <img v-if="form.image" :src="showImage(form.image)" alt="" height="40px"
-                           width="40px">
+                      <input @change="changeImage($event)" type="file" name="image" class="form-control" :class="{ 'is-invalid': form.errors.has('image') }">
+                      <div class="error" v-if="form.errors.has('image')" v-html="form.errors.get('image')"/>
+                      <img v-if="form.image" :src="showImage(form.image)" alt="" height="40px" width="40px">
                     </div>
                   </div>
                   <div class="col-md-12">
@@ -148,7 +129,6 @@
                         <vue-editor name="paragraph" v-model="form.paragraph" :class="{ 'is-invalid': form.errors.has('paragraph') }"></vue-editor>
                         <div class="error" v-if="form.errors.has('paragraph')" v-html="form.errors.get('paragraph')"/>
                       </div>
-
                     </div>
                   </div>
                 </div>

@@ -74,6 +74,7 @@ Route::group(['middleware' => ['jwt:api']], function () {
     //program
     Route::apiResource('programs',ProgramController::class);
     Route::get('search/programs/{query}', [ProgramController::class,'search']);
+    Route::get('user-programs', [ProgramController::class,'userProgram']);
     //customer
     Route::apiResource('customers',CustomerController::class);
     Route::get('search/customers/{query}', [CustomerController::class,'search']);
@@ -91,6 +92,7 @@ Route::group(['middleware' => ['jwt:api']], function () {
     Route::get('get-all-session', [CommonController::class,'getAllSession']);
 });
 
+Route::get('get-all-slider', [FrontController::class,'getAllSlider']);
 Route::get('get-all-program', [FrontController::class,'getAllProgram']);
 Route::get('get-all-events', [FrontController::class,'getAllEvents']);
 Route::get('get-program-details', [FrontController::class, 'getOurProgramDetails']);

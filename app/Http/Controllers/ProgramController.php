@@ -4,20 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Program\ProgramStoreRequest;
 use App\Http\Resources\Program\ProgramCollection;
+use App\Models\CustomerProgram;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
 class ProgramController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         $programs = Program::orderBy('id','desc')->paginate(15);
         return new ProgramCollection($programs);
     }
 
-    public function store(ProgramStoreRequest $request)
-    {
+    public function store(ProgramStoreRequest $request){
         if ($request->has('image')) {
             $image = $request->image;
             $name = uniqid().time().'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
@@ -33,13 +32,14 @@ class ProgramController extends Controller
         $program->ordering = $request->ordering;
         $program->image = $name;
         $program->status =  $request->status;
+        $program->program_date =  $request->program_date;
+        $program->program_time =  $request->program_time;
         $program->save();
 
         return response()->json(['message'=>'Program Created Successfully'],200);
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $program = Program::where('id',$request->id)->first();
         $image = $request->image;
 
@@ -68,12 +68,13 @@ class ProgramController extends Controller
         $program->ordering = $request->ordering;
         $program->image = $name;
         $program->status =  $request->status;
+        $program->program_date =  date('Y-m-d',strtotime($request->program_date));
+        $program->program_time =  $request->program_time;
         $program->save();
         return response()->json(['message'=>'Program Updated Successfully'],200);
     }
 
-    public function destroy($id)
-    {
+    public function destroy($id){
         $program = Program::where('id', $id)->first();
         if ($program->image) {
             $destinationPath = '/images/program/';
@@ -88,9 +89,14 @@ class ProgramController extends Controller
     }
 
 
-    public function search($query)
-    {
-        return new ProgramCollection(Program::Where('title', 'like', "%$query%")
-            ->paginate(10));
+    public function search($query){
+        return new ProgramCollection(Program::Where('title', 'like', "%$query%")->paginate(10));
+    }
+
+    public function userProgram(){
+        $user_program = CustomerProgram::query()->with(['customer','program'])->get();
+        return response()->json([
+           'programs' => $user_program
+        ]);
     }
 }

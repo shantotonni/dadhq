@@ -10,6 +10,7 @@ import MenuPermission from '../views/users/MenuPermission'
 import SliderList from '../views/slider/Index'
 import EventList from '../views/event/Index'
 import ProgramList from '../views/program/Index'
+import UserProgramList from '../views/program/UserProgram'
 import CustomerList from '../views/customer/Index'
 
 import NotFound from '../views/404/Index';
@@ -69,6 +70,8 @@ const routes = [
             {path: baseurl + 'program-list', name: 'ProgramList', component: ProgramList},
             //event
             {path: baseurl + 'customer-list', name: 'CustomerList', component: CustomerList},
+            //user program
+            {path: baseurl + 'user-program', name: 'UserProgramList', component: UserProgramList},
         ],
         beforeEnter(to, from, next) {
             checkToken(to, from, next);
