@@ -10,9 +10,11 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HeadController;
 use App\Http\Controllers\HostelFeeController;
+use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MenuPermissionController;
 use App\Http\Controllers\MiscellaniousController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SessionHeadController;
@@ -67,6 +69,7 @@ Route::group(['middleware' => ['jwt:api']], function () {
 //Slider
     Route::apiResource('sliders',SliderController::class);
     Route::get('search/sliders/{query}', [SliderController::class,'search']);
+
     //event
     Route::apiResource('events',EventController::class);
     Route::get('search/events/{query}', [EventController::class,'search']);
@@ -78,6 +81,14 @@ Route::group(['middleware' => ['jwt:api']], function () {
     //customer
     Route::apiResource('customers',CustomerController::class);
     Route::get('search/customers/{query}', [CustomerController::class,'search']);
+
+    //partner
+    Route::apiResource('partners',PartnerController::class);
+    Route::get('search/partners/{query}', [PartnerController::class,'search']);
+    //instructor
+    Route::apiResource('instructors',InstructorController::class);
+    Route::get('instructor-details/{id}',[InstructorController::class,'show']);
+    Route::get('search/instructors/{query}', [InstructorController::class,'search']);
 
     //menu resource route
     Route::apiResource('menu', MenuController::class);

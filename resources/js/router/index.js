@@ -8,10 +8,13 @@ import UserList from '../views/users/Index'
 import MenuList from '../views/menu/List'
 import MenuPermission from '../views/users/MenuPermission'
 import SliderList from '../views/slider/Index'
+import PartnerList from '../views/partner/Index'
 import EventList from '../views/event/Index'
 import ProgramList from '../views/program/Index'
 import UserProgramList from '../views/program/UserProgram'
 import CustomerList from '../views/customer/Index'
+import InstructorList from '../views/instructor/Index.vue'
+import InstructorsDetails from '../views/instructor/Details.vue'
 
 import NotFound from '../views/404/Index';
 import {baseurl} from '../base_url'
@@ -64,6 +67,8 @@ const routes = [
             {path: baseurl + 'user-menu-permission', name: 'UserMenuPermission', component: MenuPermission},
             //slider
             {path: baseurl + 'slider-list', name: 'SliderList', component: SliderList},
+            //partners
+            {path: baseurl + 'partner-list', name: 'PartnerList', component: PartnerList},
             //event
             {path: baseurl + 'event-list', name: 'EventList', component: EventList},
             //event
@@ -72,6 +77,8 @@ const routes = [
             {path: baseurl + 'customer-list', name: 'CustomerList', component: CustomerList},
             //user program
             {path: baseurl + 'user-program', name: 'UserProgramList', component: UserProgramList},
+            {path: baseurl + 'instructor-list', name: 'InstructorList', component: InstructorList},
+            {path: baseurl + 'instructor-details/:id', name: 'InstructorsDetails', component: InstructorsDetails},
         ],
         beforeEnter(to, from, next) {
             checkToken(to, from, next);
