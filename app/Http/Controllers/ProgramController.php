@@ -32,7 +32,7 @@ class ProgramController extends Controller
         $program->ordering = $request->ordering;
         $program->image = $name;
         $program->status =  $request->status;
-        $program->program_date =  $request->program_date;
+        $program->program_date =  date('Y-m-d',strtotime($request->program_date));
         $program->program_time =  $request->program_time;
         $program->save();
 
@@ -94,7 +94,7 @@ class ProgramController extends Controller
     }
 
     public function userProgram(){
-        $user_program = CustomerProgram::query()->with(['customer','program'])->get();
+        $user_program = CustomerProgram::query()->with(['program'])->get();
         return response()->json([
            'programs' => $user_program
         ]);

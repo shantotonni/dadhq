@@ -20,24 +20,22 @@
                   <table class="table table-bordered table-striped dt-responsive nowrap dataTable no-footer dtr-inline table-sm small">
                     <thead>
                     <tr>
-                      <th>SN</th>
-                      <th>Program Name</th>
-                      <th>Description</th>
-                      <th>User</th>
-                      <th>Program Date</th>
-                      <th>Program Time</th>
-                      <th>Image</th>
+                      <th class="text-center">SN</th>
+                      <th class="text-center">Program Name</th>
+                      <th class="text-center">User</th>
+                      <th class="text-center">Program Date</th>
+                      <th class="text-center">Program Time</th>
+                      <th class="text-center">Image</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="(program, i) in programs" :key="program.id" v-if="programs.length">
                       <th class="text-center" scope="row">{{ ++i }}</th>
-                      <td class="text-left">{{ program.program.title }}</td>
-                      <td class="text-left" v-html="program.program.description" width="50%"></td>
-                      <td class="text-left">{{ program.customer.first_name }}  {{ program.customer.last_name }}</td>
-                      <td class="text-right">{{ program.program.program_date }}</td>
-                      <td class="text-right">{{ program.program.program_time }}</td>
-                      <td class="text-left">
+                      <td class="text-center">{{ program.program.title }}</td>
+                      <td class="text-center">{{ program.first_name }}  {{ program.last_name }}</td>
+                      <td class="text-center">{{ program.program.program_date }}</td>
+                      <td class="text-center">{{ program.program.program_time }}</td>
+                      <td class="text-center">
                         <img v-if="program.program.image" height="40" width="40" :src="tableImage(program.program.image)" alt="">
                       </td>
                     </tr>

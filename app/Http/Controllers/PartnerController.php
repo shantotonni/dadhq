@@ -65,6 +65,7 @@ class PartnerController extends Controller
 
         $partner->title = $request->title;
         $partner->status = $request->status;
+        $partner->image = $name;
         $partner->updated_at = Carbon::now();
         $partner->save();
         return response()->json(['message'=>'Partner Updated Successfully'],200);

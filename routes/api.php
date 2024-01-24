@@ -1,36 +1,23 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\BankController;
-use App\Http\Controllers\BranchController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HeadController;
-use App\Http\Controllers\HostelFeeController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MenuPermissionController;
-use App\Http\Controllers\MiscellaniousController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\ProgramController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\SessionHeadController;
 use App\Http\Controllers\SliderController;
-use App\Http\Controllers\StudentBillController;
-use App\Http\Controllers\StudentBillPaymentController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\AuthController;
-use \App\Http\Controllers\SessionsController;
-use \App\Http\Controllers\YearController;
 use \App\Http\Controllers\SettingController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\CommonController;
-use \App\Http\Controllers\SupportController;
-use \App\Http\Controllers\SessionFeeController;
 
 Route::post('login', [AuthController::class, 'login']);
 
@@ -107,8 +94,11 @@ Route::get('get-all-slider', [FrontController::class,'getAllSlider']);
 Route::get('get-all-program', [FrontController::class,'getAllProgram']);
 Route::get('get-all-events', [FrontController::class,'getAllEvents']);
 Route::get('get-program-details', [FrontController::class, 'getOurProgramDetails']);
+Route::get('get-instructor', [FrontController::class, 'getInstructor']);
+Route::get('get-all-partner', [FrontController::class, 'getAllPartner']);
 
 Route::group(['middleware' => 'CustomerAuth'], function () {
     Route::post('auth/profile-update', [CustomerAuthController::class, 'updateProfile']);
-    Route::get('join-program', [ActivityController::class, 'joinProgram']);
 });
+
+Route::post('join-program', [ActivityController::class, 'joinProgram']);
