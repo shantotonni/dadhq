@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="container-fluid">
-      <breadcrumb :options="['Program List']"/>
+      <breadcrumb :options="['Event List']"/>
       <div class="row">
         <div class="col-xl-12">
           <div class="card">
@@ -24,19 +24,21 @@
                       <th class="text-center">Program Name</th>
                       <th class="text-center">User</th>
                       <th class="text-center">Program Date</th>
-                      <th class="text-center">Program Time</th>
+                      <th class="text-center">Community Partner</th>
                       <th class="text-center">Image</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="(program, i) in programs" :key="program.id" v-if="programs.length">
                       <th class="text-center" scope="row">{{ ++i }}</th>
-                      <td class="text-center">{{ program.program.title }}</td>
+                      <td class="text-center">{{ program.event.title }}</td>
                       <td class="text-center">{{ program.first_name }}  {{ program.last_name }}</td>
-                      <td class="text-center">{{ program.program.program_date }}</td>
-                      <td class="text-center">{{ program.program.program_time }}</td>
+                      <td class="text-center">{{ program.event.event_date }}</td>
                       <td class="text-center">
-                        <img v-if="program.program.image" height="40" width="40" :src="tableImage(program.program.image)" alt="">
+                        <p v-html="program.event.description"></p>
+                      </td>
+                      <td class="text-center">
+                        <img v-if="program.event.image" height="40" width="40" :src="tableImage(program.event.image)" alt="">
                       </td>
                     </tr>
                     </tbody>
@@ -107,7 +109,7 @@ export default {
       this.$toaster.success('Data Successfully Refresh');
     },
     tableImage(image) {
-      return window.location.origin + "/images/program/" + image;
+      return window.location.origin + "/images/event/" + image;
     },
   },
 }

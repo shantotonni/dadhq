@@ -17,8 +17,8 @@ class ProgramCollection extends ResourceCollection
                     'description'=>$program->description,
                     'ordering'=>$program->ordering,
                     'status'=>$program->status,
-                    'program_date'=> date('y-m-d',strtotime($program->program_date)),
-                    'program_time'=> $program->program_time,
+                    //'program_date'=> date('Y-m-d',strtotime($program->program_date)),
+                    //'program_time'=> $program->program_time,
                     'image'=>$program->image,
                 ];
             })

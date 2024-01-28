@@ -101,4 +101,4 @@ Route::group(['middleware' => 'CustomerAuth'], function () {
     Route::post('auth/profile-update', [CustomerAuthController::class, 'updateProfile']);
 });
 
-Route::post('join-program', [ActivityController::class, 'joinProgram']);
+Route::post('join-event', [ActivityController::class, 'joinEvent']);

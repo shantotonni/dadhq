@@ -10,7 +10,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ActivityController extends Controller
 {
-    public function joinProgram(Request $request){
+    public function joinEvent(Request $request){
         $this->validate($request,[
             'first_name'=>'required',
             'last_name'=>'required',
@@ -18,7 +18,7 @@ class ActivityController extends Controller
             'phone'=>'required',
             'ages_of_children'=>'required',
             'ages_of_father'=>'required',
-            'program_id'=>'required',
+            'event_id'=>'required',
         ]);
 
 //        $want_to_receive_email = $request->want_to_receive_email;
@@ -28,13 +28,6 @@ class ActivityController extends Controller
 //            $status = 'N';
 //        }
 
-        $this->validate($request,[
-            'name'=>'required',
-            'email'=>'required',
-            'message'=>'required',
-        ]);
-
-
         $customer_program = new CustomerProgram();
         $customer_program->first_name = $request->first_name;
         $customer_program->last_name = $request->last_name;
@@ -43,7 +36,7 @@ class ActivityController extends Controller
         $customer_program->ages_of_children = $request->ages_of_children;
         $customer_program->ages_of_father = $request->ages_of_father;
         //$customer_program->want_to_receive_email = $status;
-        $customer_program->program_id = $request->program_id;
+        $customer_program->event_id = $request->event_id;
         $customer_program->save();
         return response()->json([
             'status'=>'success',

@@ -20,4 +20,7 @@ class CustomerProgram extends Model
     public function program(){
         return $this->belongsTo(Program::class,'program_id','id');
     }
+    public function event(){
+        return $this->belongsTo(Event::class,'event_id','id');
+    }
 }

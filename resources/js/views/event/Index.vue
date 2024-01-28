@@ -105,36 +105,37 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Status</label>
-                      <select type="Status" name="status" v-model="form.status"
-                              class="form-control"
-                              :class="{ 'is-invalid': form.errors.has('status') }">
+                      <select type="Status" name="status" v-model="form.status" class="form-control" :class="{ 'is-invalid': form.errors.has('status') }">
                         <option disabled value="">Select Status</option>
-                        <option >
-                          Active
-                        </option>
-                        <option >
-                          Inactive
-                        </option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
                       </select>
                       <div class="error" v-if="form.errors.has('status')"
                            v-html="form.errors.get('status')"/>
                     </div>
                   </div>
-
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Event Date</label>
-                      <datepicker name="From hour"
-                                  placeholder="Enter To Date"
-                                  :format="customFormatter"
-                                  v-model="form.event_date"
-                                  class="form-control"
-                                  :class="{ 'is-invalid': form.errors.has('event_date') }"> </datepicker>
-
-                      <div class="error" v-if="form.errors.has('event_date')"
-                           v-html="form.errors.get('event_date')"/>
+                      <input type="text" name="event_date" v-model="form.event_date" class="form-control" :class="{ 'is-invalid': form.errors.has('event_date') }">
+                      <div class="error" v-if="form.errors.has('event_date')" v-html="form.errors.get('event_date')" />
                     </div>
                   </div>
+
+<!--                  <div class="col-md-6">-->
+<!--                    <div class="form-group">-->
+<!--                      <label>Event Date</label>-->
+<!--                      <datepicker name="From hour"-->
+<!--                                  placeholder="Enter To Date"-->
+<!--                                  :format="customFormatter"-->
+<!--                                  v-model="form.event_date"-->
+<!--                                  class="form-control"-->
+<!--                                  :class="{ 'is-invalid': form.errors.has('event_date') }"> </datepicker>-->
+
+<!--                      <div class="error" v-if="form.errors.has('event_date')"-->
+<!--                           v-html="form.errors.get('event_date')"/>-->
+<!--                    </div>-->
+<!--                  </div>-->
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Image <small>(Image type:jpeg,jpg,png,svg)</small></label>
@@ -150,7 +151,7 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <div class="form-group">
-                        <label>description</label>
+                        <label>Community Partner</label>
                         <vue-editor name="description" v-model="form.description" :class="{ 'is-invalid': form.errors.has('description') }"></vue-editor>
                         <div class="error" v-if="form.errors.has('description')" v-html="form.errors.get('description')"/>
                       </div>

@@ -33,8 +33,8 @@
                         <th>SN</th>
                         <th>Program Name</th>
                         <th>Description</th>
-                        <th>Date</th>
-                        <th>Time</th>
+<!--                        <th>Date</th>-->
+<!--                        <th>Time</th>-->
                         <th>Status</th>
                         <th>Image</th>
                         <th>Action</th>
@@ -45,8 +45,8 @@
                       <th class="text-center" scope="row">{{ ++i }}</th>
                       <td class="text-left">{{ program.title }}</td>
                       <td class="text-left" v-html="program.description" width="50%"></td>
-                      <td class="text-right">{{ program.program_date }}</td>
-                      <td class="text-right">{{ program.program_time }}</td>
+<!--                      <td class="text-right">{{ program.program_date }}</td>-->
+<!--                      <td class="text-right">{{ program.program_time }}</td>-->
                       <td class="text-left">{{ program.status }}</td>
                       <td class="text-left">
                         <img v-if="program.image" height="40" width="40" :src="tableImage(program.image)" alt="">
@@ -96,20 +96,20 @@
                       <div class="error" v-if="form.errors.has('short')" v-html="form.errors.get('short')" />
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Program Date</label>
-                      <datepicker :format="customFormatter" v-model="form.program_date" input-class="form-control" :class="{ 'is-invalid': form.errors.has('program_date') }"></datepicker>
-                      <div class="error" v-if="form.errors.has('program_date')" v-html="form.errors.get('program_date')"/>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Program Time</label>
-                      <input class="form-control" type="time" v-model="form.program_time" :class="{ 'is-invalid': form.errors.has('program_time') }">
-                      <div class="error" v-if="form.errors.has('program_time')" v-html="form.errors.get('program_time')"/>
-                    </div>
-                  </div>
+<!--                  <div class="col-md-6">-->
+<!--                    <div class="form-group">-->
+<!--                      <label>Program Date</label>-->
+<!--                      <datepicker :format="customFormatter" v-model="form.program_date" input-class="form-control" :class="{ 'is-invalid': form.errors.has('program_date') }"></datepicker>-->
+<!--                      <div class="error" v-if="form.errors.has('program_date')" v-html="form.errors.get('program_date')"/>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="col-md-6">-->
+<!--                    <div class="form-group">-->
+<!--                      <label>Program Time</label>-->
+<!--                      <input class="form-control" type="time" v-model="form.program_time" :class="{ 'is-invalid': form.errors.has('program_time') }">-->
+<!--                      <div class="error" v-if="form.errors.has('program_time')" v-html="form.errors.get('program_time')"/>-->
+<!--                    </div>-->
+<!--                  </div>-->
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Ordering</label>
@@ -188,8 +188,8 @@ export default {
         image :'',
         status :'',
         ordering :'',
-        program_date :'',
-        program_time :'',
+        //program_date :'',
+        //program_time :'',
       }),
     }
   },
