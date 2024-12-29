@@ -7,6 +7,7 @@ use App\Http\Resources\Instructor\InstructorCollection;
 use App\Http\Resources\Partner\PartnerCollection;
 use App\Http\Resources\Program\ProgramCollection;
 use App\Http\Resources\Slider\SliderCollection;
+use App\Models\Contact;
 use App\Models\Event;
 use App\Models\Instructor;
 use App\Models\Partner;
@@ -22,7 +23,7 @@ class FrontController extends Controller
     }
 
     public function getAllProgram(){
-        $programs = Program::query()->orderBy('ordering','asc')->get();
+        $programs = Program::query()->where('status','active')->orderBy('ordering','asc')->get();
         return new ProgramCollection($programs);
     }
 
@@ -39,7 +40,7 @@ class FrontController extends Controller
     }
 
     public function getAllPartner(){
-        $partners = Partner::query()->get();
+        $partners = Partner::query()->where('status','active')->get();
         return new PartnerCollection($partners);
     }
 
@@ -47,4 +48,26 @@ class FrontController extends Controller
         $instructor = Instructor::query()->get();
         return new InstructorCollection($instructor);
     }
+
+    public function storeContact(Request $request){
+        $this->validate($request,[
+            'name'=>'required',
+            'email'=>'required',
+            'subject'=>'required',
+            'message'=>'required',
+        ]);
+
+        $contact            = new Contact();
+        $contact->name      = $request->name;
+        $contact->email     = $request->email;
+        $contact->subject   = $request->subject;
+        $contact->message   = $request->message;
+        $contact->save();
+
+        return response()->json([
+            'status'=>'success',
+            'message'=>'Successfully Inserted'
+        ]);
+    }
+
 }

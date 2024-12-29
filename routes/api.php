@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HeadController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MenuPermissionController;
@@ -47,12 +48,6 @@ Route::group(['middleware' => ['jwt:api']], function () {
         Route::get('by-id/{id}',[HeadController::class,'byId']);
     });
 
-    Route::apiResource('student',StudentController::class);
-    Route::get('search/student/{query}', [StudentController::class,'search']);
-    Route::get('get-schedule-data/{session_id}/{category_id}', [StudentController::class,'getScheduleData']);
-    Route::get('get-student-wise-schedule-data/{student_id}', [StudentController::class,'getStudentWiseScheduleData']);
-    Route::post('student-details', [StudentController::class,'getStudentDetails']);
-
 //Slider
     Route::apiResource('sliders',SliderController::class);
     Route::get('search/sliders/{query}', [SliderController::class,'search']);
@@ -88,6 +83,8 @@ Route::group(['middleware' => ['jwt:api']], function () {
     Route::post('save-user-menu-permission', [MenuPermissionController::class,'saveUserMenuPermission']);
 
     Route::get('get-all-session', [CommonController::class,'getAllSession']);
+
+    Route::get('get-all-contact', [HomeController::class,'getAllContact']);
 });
 
 Route::get('get-all-slider', [FrontController::class,'getAllSlider']);
@@ -96,6 +93,7 @@ Route::get('get-all-events', [FrontController::class,'getAllEvents']);
 Route::get('get-program-details', [FrontController::class, 'getOurProgramDetails']);
 Route::get('get-instructor', [FrontController::class, 'getInstructor']);
 Route::get('get-all-partner', [FrontController::class, 'getAllPartner']);
+Route::post('contact-store', [FrontController::class, 'storeContact']);
 
 Route::group(['middleware' => 'CustomerAuth'], function () {
     Route::post('auth/profile-update', [CustomerAuthController::class, 'updateProfile']);

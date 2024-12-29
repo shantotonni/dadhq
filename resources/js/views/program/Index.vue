@@ -122,8 +122,8 @@
                       <label>Status</label>
                       <select type="Status" name="status" v-model="form.status" class="form-control" :class="{ 'is-invalid': form.errors.has('status') }">
                         <option disabled value="">Select Status</option>
-                        <option >Active</option>
-                        <option >Inactive</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
                       </select>
                       <div class="error" v-if="form.errors.has('status')" v-html="form.errors.get('status')"/>
                     </div>

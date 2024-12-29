@@ -8,6 +8,7 @@ import UserList from '../views/users/Index'
 import MenuList from '../views/menu/List'
 import MenuPermission from '../views/users/MenuPermission'
 import SliderList from '../views/slider/Index'
+import ContactList from '../views/contact/Index'
 import PartnerList from '../views/partner/Index'
 import EventList from '../views/event/Index'
 import ProgramList from '../views/program/Index'
@@ -75,6 +76,7 @@ const routes = [
             {path: baseurl + 'program-list', name: 'ProgramList', component: ProgramList},
             //event
             {path: baseurl + 'customer-list', name: 'CustomerList', component: CustomerList},
+            {path: baseurl + 'contact-list', name: 'ContactList', component: ContactList},
             //user program
             {path: baseurl + 'user-program', name: 'UserProgramList', component: UserProgramList},
             {path: baseurl + 'instructor-list', name: 'InstructorList', component: InstructorList},

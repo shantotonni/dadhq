@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ContactCollection;
+use App\Models\Contact;
 use App\Models\Depot;
 use App\Models\UserOutlet;
 use App\Services\DeviceInfo;
@@ -39,5 +41,10 @@ class HomeController extends Controller
     {
         $data = [];
         return $data;
+    }
+
+    public function getAllContact(){
+        $contacts = Contact::orderBy('created_at','desc')->paginate(12);
+        return new ContactCollection($contacts);
     }
 }
